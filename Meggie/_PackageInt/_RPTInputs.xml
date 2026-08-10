@@ -1,0 +1,13 @@
+<RPTInputs>
+	<RPTInput Path="D:\MSFSsdkprojects\Meggie\PackageDefinitions\robo-airport-egmeg-meggie\ContentInfo\Thumbnail.jpg">
+		<Package Name="robo-airport-egmeg-meggie">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\Meggie\PackageSources\Scenery\airport-egmeg-meggie\scenery\EGMEG.xml">
+		<Package Name="robo-airport-egmeg-meggie">
+			<AssetGroup Name="scenery"/>
+		</Package>
+	</RPTInput>
+</RPTInputs>
+

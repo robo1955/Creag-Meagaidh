@@ -1,0 +1,24 @@
+{
+  "content": [
+    {
+      "path": "bglindex.bout",
+      "size": 685,
+      "date": 134308433190017058
+    },
+    {
+      "path": "contentinfo/robo-airport-egmeg-meggie/contenthistory.json",
+      "size": 150,
+      "date": 134308433190000000
+    },
+    {
+      "path": "contentinfo/robo-airport-egmeg-meggie/thumbnail.jpg",
+      "size": 5446,
+      "date": 134296509350000000
+    },
+    {
+      "path": "scenery/airport-egmeg-meggie/scenery/egmeg.bgl",
+      "size": 1017,
+      "date": 134308433190000006
+    }
+  ]
+}

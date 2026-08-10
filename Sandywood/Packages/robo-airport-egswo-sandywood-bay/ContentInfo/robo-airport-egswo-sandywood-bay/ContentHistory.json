@@ -1,0 +1,10 @@
+{
+  "package-name": "robo-airport-egswo-sandywood-bay",
+  "items": [
+    {
+      "type": "Airport",
+      "content": "EGSWO",
+      "revision": 1
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "package-name": "robo-airport-egmeg-meggie",
+  "items": [
+    {
+      "type": "Airport",
+      "content": "EGCRG",
+      "revision": 1
+    }
+  ]
+}
