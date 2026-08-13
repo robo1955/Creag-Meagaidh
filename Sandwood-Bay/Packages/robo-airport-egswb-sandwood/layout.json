@@ -1,0 +1,24 @@
+{
+  "content": [
+    {
+      "path": "bglindex.bout",
+      "size": 741,
+      "date": 134311057800017058
+    },
+    {
+      "path": "contentinfo/robo-airport-egswb-sandwood/contenthistory.json",
+      "size": 152,
+      "date": 134311057800000000
+    },
+    {
+      "path": "contentinfo/robo-airport-egswb-sandwood/thumbnail.jpg",
+      "size": 5446,
+      "date": 134296509350000000
+    },
+    {
+      "path": "scenery/airport-egswb-sandwood/scenery/egswb.bgl",
+      "size": 1899,
+      "date": 134311057800000006
+    }
+  ]
+}

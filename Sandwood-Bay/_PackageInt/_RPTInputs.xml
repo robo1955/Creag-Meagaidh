@@ -1,0 +1,13 @@
+<RPTInputs>
+	<RPTInput Path="d:\msfssdkprojects\sandwood-bay\PackageDefinitions\robo-airport-egswb-sandwood\ContentInfo\Thumbnail.jpg">
+		<Package Name="robo-airport-egswb-sandwood">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="d:\msfssdkprojects\sandwood-bay\PackageSources\Scenery\airport-egswb-sandwood\scenery\EGSWB.xml">
+		<Package Name="robo-airport-egswb-sandwood">
+			<AssetGroup Name="scenery"/>
+		</Package>
+	</RPTInput>
+</RPTInputs>
+
