@@ -1,0 +1,24 @@
+{
+  "content": [
+    {
+      "path": "bglindex.bout",
+      "size": 689,
+      "date": 134311218240017058
+    },
+    {
+      "path": "contentinfo/boomervr-airport-egkea-kearvaig/contenthistory.json",
+      "size": 156,
+      "date": 134311218240000000
+    },
+    {
+      "path": "contentinfo/boomervr-airport-egkea-kearvaig/thumbnail.jpg",
+      "size": 5446,
+      "date": 134259091280000000
+    },
+    {
+      "path": "scenery/airport-egkea-kearvaig/scenery/egkea.bgl",
+      "size": 1335,
+      "date": 134311218240000006
+    }
+  ]
+}

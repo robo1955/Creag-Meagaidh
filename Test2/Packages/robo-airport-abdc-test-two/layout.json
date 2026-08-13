@@ -1,0 +1,24 @@
+{
+  "content": [
+    {
+      "path": "bglindex.bout",
+      "size": 687,
+      "date": 134311221350017058
+    },
+    {
+      "path": "contentinfo/robo-airport-abdc-test-two/contenthistory.json",
+      "size": 150,
+      "date": 134311221350000000
+    },
+    {
+      "path": "contentinfo/robo-airport-abdc-test-two/thumbnail.jpg",
+      "size": 5446,
+      "date": 134296509350000000
+    },
+    {
+      "path": "scenery/airport-abdc-test-two/scenery/abdc.bgl",
+      "size": 839,
+      "date": 134311221350000006
+    }
+  ]
+}

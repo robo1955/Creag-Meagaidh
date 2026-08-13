@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<FSData version="9.0">
+	<SceneryObject groupIndex="2" lat="57.40224061322656" lon="-4.93337924234275" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<SimObject containerTitle="tsr-windsock_redwhite_lit" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject groupIndex="1" lat="57.40283099266593" lon="-4.94008346049167" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<SimObject containerTitle="tsr-windsock_redwhite_lit" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject displayName="TIN_ARCH_HANGER_SILVER" groupIndex="3" lat="57.40196080652493" lon="-4.93812850894035" alt="0.00000000000000" pitch="0.000301" bank="0.000301" heading="92.333475" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<LibraryObject name="{AB74CC2A-EA2A-4E11-B1C4-779BF39A07E8}" scale="1.000000"/>
+	</SceneryObject>
+	<Airport displayName="Test Two" groupID="1" groupGenerated="FALSE" name="Test Two" ident="ABDC" lat="57.40249435560693" lon="-4.93557336354111" alt="155.27507725171745" magvar="0.000000" trafficScalar="1.000000" airportTestRadius="2000.00000000000000" applyFlatten="FALSE" isOnTIN="FALSE" tinColorCorrection="TRUE">
+		<AirportArchetype/>
+		<Runway parentGroupID="1" lat="57.40245959173347" lon="-4.93707544131378" alt="135.77639032155275" heading="267.06729125976562" length="473.34204101562500" width="20.00000000000000" patternAltitude="304.79998779296875" surface="{0E12195B-4A50-42D1-B8C8-177B270F3AAB}" transparent="FALSE" number="27" designator="NONE" primaryLanding="TRUE" primaryTakeoff="TRUE" primaryPattern="LEFT" secondaryLanding="TRUE" secondaryTakeoff="TRUE" secondaryPattern="LEFT" primaryMarkingBias="0.00000000000000" secondaryMarkingBias="0.00000000000000" groundMerging="TRUE" excludeVegetationAround="TRUE" excludeBuildingAround="TRUE">
+			<Markings edges="FALSE" threshold="TRUE" alternateThreshold="FALSE" fixedDistance="FALSE" alternateFixedDistance="FALSE" touchdown="FALSE" alternateTouchdown="FALSE" dashes="TRUE" ident="TRUE" leadingZeroIdent="TRUE" precision="FALSE" alternatePrecision="FALSE" edgePavement="FALSE" singleEnd="FALSE" primaryClosed="FALSE" secondaryClosed="FALSE" primaryStol="FALSE" secondaryStol="FALSE" noThresholdEndArrows="FALSE"/>
+			<Lights center="LOW" edge="LOW"/>
+			<RunwayStart end="PRIMARY" lat="57.40255451598188" lon="-4.93318771682128" alt="135.78548977058381" heading="267.06729125976562"/>
+			<RunwayStart end="SECONDARY" lat="57.40234411467853" lon="-4.94096744011094" alt="135.77309422474355" heading="87.06866455078125"/>
+		</Runway>
+		<Aprons/>
+		<PaintedElements/>
+		<ApronEdgeLights/>
+	</Airport>
+</FSData>
+

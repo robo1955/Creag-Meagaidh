@@ -1,0 +1,10 @@
+{
+  "package-name": "boomervr-airport-egkea-kearvaig",
+  "items": [
+    {
+      "type": "Airport",
+      "content": "EGKEA",
+      "revision": 1
+    }
+  ]
+}

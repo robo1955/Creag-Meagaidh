@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Version="2" Name="Kearvaig" FolderName="Packages" MetadataFolderName="PackagesMetadata">
+	<OutputDirectory>.</OutputDirectory>
+	<TemporaryOutputDirectory>_PackageInt</TemporaryOutputDirectory>
+	<Packages>
+		<Package>PackageDefinitions\boomervr-airport-egkea-kearvaig.xml</Package>
+	</Packages>
+	<PublishingGroups/>
+</Project>
+

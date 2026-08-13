@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<FSData version="9.0">
+	<SceneryObject displayName="ESD_Clu_Tent_Blue" groupIndex="2" lat="58.60921386457719" lon="-4.93940450399312" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<LibraryObject name="{C0806AA5-7526-469D-A587-4000E027BE38}" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject displayName="SCPC_Boats_01" groupIndex="7" lat="58.60844405194930" lon="-4.94232757206750" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<LibraryObject name="{9E400B06-A524-4718-982A-79C3679065D5}" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject displayName="SCPC_Boats_02" groupIndex="6" lat="58.60845080559066" lon="-4.94223782471031" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<LibraryObject name="{6FED306E-D5C0-486E-B13C-EEF1A3CD8A6A}" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject groupIndex="5" lat="58.60378090684564" lon="-4.93320909745018" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<SimObject containerTitle="tsr-windsock_redwhite_lit" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject groupIndex="1" lat="58.60680086302928" lon="-4.94205827113345" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<SimObject containerTitle="tsr-windsock_redwhite_lit" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject groupIndex="3" lat="58.60799171796223" lon="-4.93275910578862" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<SimObject containerTitle="tsr-windsock_redwhite_lit" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject groupIndex="4" lat="58.60822759677154" lon="-4.94053688989788" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<SimObject containerTitle="tsr-windsock_redwhite_lit" scale="1.000000"/>
+	</SceneryObject>
+	<SceneryObject displayName="Small_WoodBoat01" groupIndex="8" lat="58.60977477828414" lon="-4.94158976451249" alt="0.00000000000000" pitch="0.000000" bank="0.000000" heading="-179.999995" imageComplexity="VERY_SPARSE" altitudeIsAgl="TRUE" snapToGround="TRUE" snapToNormal="FALSE">
+		<LibraryObject name="{76F008E7-997E-46D6-812D-7E7846F4713D}" scale="1.000000"/>
+	</SceneryObject>
+	<Airport displayName="Kearvaig" groupID="1" groupGenerated="FALSE" name="Kearvaig" ident="EGKEA" lat="58.60780759950649" lon="-4.93667067706451" alt="11.12645945511758" magvar="0.000000" trafficScalar="1.000000" airportTestRadius="2000.00000000000000" applyFlatten="FALSE" isOnTIN="FALSE" tinColorCorrection="TRUE">
+		<AirportArchetype/>
+		<Runway parentGroupID="1" lat="58.60769237067274" lon="-4.93658198114747" alt="23.39807129278779" heading="123.47463989257812" length="600.18402099609375" width="15.00000000000000" patternAltitude="304.79998779296875" surface="{8862C0D8-5ADB-4BA8-952F-7D2E199CE9AC}" transparent="FALSE" number="12" designator="NONE" primaryLanding="TRUE" primaryTakeoff="TRUE" primaryPattern="LEFT" secondaryLanding="TRUE" secondaryTakeoff="TRUE" secondaryPattern="LEFT" primaryMarkingBias="0.00000000000000" secondaryMarkingBias="0.00000000000000" groundMerging="TRUE" excludeVegetationAround="TRUE" excludeBuildingAround="TRUE">
+			<Markings edges="FALSE" threshold="FALSE" alternateThreshold="FALSE" fixedDistance="FALSE" alternateFixedDistance="FALSE" touchdown="FALSE" alternateTouchdown="FALSE" dashes="FALSE" ident="TRUE" leadingZeroIdent="FALSE" precision="FALSE" alternatePrecision="FALSE" edgePavement="FALSE" singleEnd="FALSE" primaryClosed="FALSE" secondaryClosed="FALSE" primaryStol="FALSE" secondaryStol="FALSE" noThresholdEndArrows="FALSE"/>
+			<Lights center="NONE" edge="NONE"/>
+			<RunwayStart end="PRIMARY" lat="58.60915227900359" lon="-4.94080098742430" alt="23.40158223453909" heading="123.47463989257812"/>
+			<RunwayStart end="SECONDARY" lat="58.60621827689071" lon="-4.93226822234106" alt="23.40044030454010" heading="-56.52452850341797"/>
+		</Runway>
+		<Aprons/>
+		<PaintedElements/>
+		<ApronEdgeLights/>
+	</Airport>
+</FSData>
+

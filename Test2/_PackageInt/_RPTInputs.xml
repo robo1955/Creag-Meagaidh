@@ -1,0 +1,33 @@
+<RPTInputs>
+	<RPTInput Path="D:\MSFSsdkprojects\Test2\PackageDefinitions\robo-airport-abdc-test-two\ContentInfo\Thumbnail.jpg">
+		<Package Name="robo-airport-abdc-test-two">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\Kearvaig\PackageDefinitions\boomervr-airport-egkea-kearvaig\ContentInfo\Thumbnail.jpg">
+		<Package Name="boomervr-airport-egkea-kearvaig">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\Kearvaig\PackageSources\Scenery\airport-egkea-kearvaig\scenery\EGKEA.xml">
+		<Package Name="boomervr-airport-egkea-kearvaig">
+			<AssetGroup Name="scenery"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\Test2\PackageSources\Scenery\airport-abdc-test-two\scenery\ABDC.xml">
+		<Package Name="robo-airport-abdc-test-two">
+			<AssetGroup Name="scenery"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\Sandwood-Bay\PackageDefinitions\robo-airport-egswb-sandwood\ContentInfo\Thumbnail.jpg">
+		<Package Name="robo-airport-egswb-sandwood">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\Sandwood-Bay\PackageSources\Scenery\airport-egswb-sandwood\scenery\EGSWB.xml">
+		<Package Name="robo-airport-egswb-sandwood">
+			<AssetGroup Name="scenery"/>
+		</Package>
+	</RPTInput>
+</RPTInputs>
+
