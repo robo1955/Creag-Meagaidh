@@ -1,0 +1,10 @@
+{
+  "package-name": "robo-airport-egskn-sky-north",
+  "items": [
+    {
+      "type": "Airport",
+      "content": "EGSKN",
+      "revision": 1
+    }
+  ]
+}

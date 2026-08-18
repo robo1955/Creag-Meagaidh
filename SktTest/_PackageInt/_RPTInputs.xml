@@ -1,0 +1,13 @@
+<RPTInputs>
+	<RPTInput Path="D:\MSFSsdkprojects\SktTest\PackageDefinitions\robo-airport-egskn-sky-north\ContentInfo\Thumbnail.jpg">
+		<Package Name="robo-airport-egskn-sky-north">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="D:\MSFSsdkprojects\SktTest\PackageSources\Scenery\airport-egskn-sky-north\scenery\EGSKN.xml">
+		<Package Name="robo-airport-egskn-sky-north">
+			<AssetGroup Name="scenery"/>
+		</Package>
+	</RPTInput>
+</RPTInputs>
+

@@ -1,0 +1,24 @@
+{
+  "content": [
+    {
+      "path": "bglindex.bout",
+      "size": 691,
+      "date": 134315163470017058
+    },
+    {
+      "path": "contentinfo/robo-airport-egskn-sky-north/contenthistory.json",
+      "size": 153,
+      "date": 134315163470000000
+    },
+    {
+      "path": "contentinfo/robo-airport-egskn-sky-north/thumbnail.jpg",
+      "size": 5446,
+      "date": 134296509350000000
+    },
+    {
+      "path": "scenery/airport-egskn-sky-north/scenery/egskn.bgl",
+      "size": 856,
+      "date": 134315163470000006
+    }
+  ]
+}
