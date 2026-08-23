@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<!--
+  ILS approaches for Saint Andrews (EGSAN) — runway 13 / 31
+  Source airport XML: PackageSources\Scenery\airport-eg56-saint-andrews\scenery\EG56.xml
+
+  HOW TO USE
+  ----------
+  1. Copy everything between PASTE START and PASTE END.
+  2. Paste it inside the <Airport> element in EG56.xml, just before </Airport>
+     (after the apron / painted-element / edge-light blocks is fine).
+  3. Also fix the two existing <Ils> blocks (see ILS FIXES below).
+     Your current GlideSlope pitch is 0.0, which will not give a 3° path,
+     and there is no <Dme /> child even though DME is required for this
+     procedure to make sense in the GPS / FMS.
+  4. Rebuild the package in Dev Mode, then confirm the procedures appear
+     as ILS 13 and ILS 31 in the world map / MCDU.
+
+  GEOMETRY USED
+  -------------
+  Runway 13/31, true heading 130 / 310, magvar 0
+  Threshold 13 : 56.30934030  -2.75580025
+  Threshold 31 : 56.29933946  -2.73431604
+  Field elev   : ~272 ft (82.86 m)
+  3° GS        : ~318 ft per NM, plus 50 ft TCH
+
+  IAF  = 10.0 NM on the extended centreline, 2000 ft
+  FAF  =  5.0 NM on the extended centreline, 1900 ft  (GS intercept)
+  MAP  = runway threshold
+  Hold = 10 NM past the far threshold, 3000 ft
+
+  Region EG is the UK ICAO prefix used for terminal waypoints.
+-->
+
+<!-- ============================================================
+     ILS FIXES  — replace the existing <Ils> ... </Ils> pairs
+     on the runway with these (same lat/lon/ident/freq as yours,
+     but with a 3° glideslope and colocated DME).
+     ============================================================ -->
+
+<!--
+			<Ils lat="56.30408956184559" lon="-2.74450937967833" alt="82.85914429090917" end="PRIMARY" ident="RTO" magvar="0.000000" heading="130.00000000000000" frequency="111.100" name="ILS 13" backCourse="FALSE">
+				<GlideSlope lat="56.30408956184559" lon="-2.74450937967833" alt="82.85914429090917" pitch="3.0" range="27N"/>
+				<Dme lat="56.30408956184559" lon="-2.74450937967833" alt="82.85914429090917" range="27N"/>
+			</Ils>
+			<Ils lat="56.30408956184559" lon="-2.74450937967833" alt="82.85914429090917" end="SECONDARY" ident="OTR" magvar="0.000000" heading="310.00000000000000" frequency="110.100" name="ILS 31" backCourse="FALSE">
+				<GlideSlope lat="56.30408956184559" lon="-2.74450937967833" alt="82.85914429090917" pitch="3.0" range="27N"/>
+				<Dme lat="56.30408956184559" lon="-2.74450937967833" alt="82.85914429090917" range="27N"/>
+			</Ils>
+-->
+
+<!-- ============================================================
+     PASTE START  — terminal waypoints + ILS 13 + ILS 31
+     ============================================================ -->
+
+		<!-- Terminal waypoints: IAF / FAF / missed-approach hold -->
+		<Waypoint lat="56.41647157" lon="-2.98596440" magvar="0.0" waypointType="UNNAMED" waypointRegion="EG" waypointIdent="IF13"/>
+		<Waypoint lat="56.36290594" lon="-2.87088232" magvar="0.0" waypointType="UNNAMED" waypointRegion="EG" waypointIdent="FF13"/>
+		<Waypoint lat="56.19089767" lon="-2.50133444" magvar="0.0" waypointType="UNNAMED" waypointRegion="EG" waypointIdent="MA13"/>
+
+		<Waypoint lat="56.19220819" lon="-2.50421214" magvar="0.0" waypointType="UNNAMED" waypointRegion="EG" waypointIdent="IF31"/>
+		<Waypoint lat="56.24577383" lon="-2.61926409" magvar="0.0" waypointType="UNNAMED" waypointRegion="EG" waypointIdent="FF31"/>
+		<Waypoint lat="56.41778209" lon="-2.98871525" magvar="0.0" waypointType="UNNAMED" waypointRegion="EG" waypointIdent="MA31"/>
+
+		<!-- ========== ILS RWY 13 (localizer RTO / 111.10) ========== -->
+		<Approach
+			type="ILS"
+			runway="13"
+			designator="NONE"
+			suffix="0"
+			gpsOverlay="FALSE"
+			fixType="TERMINAL_WAYPOINT"
+			fixRegion="EG"
+			fixIdent="FF13"
+			altitude="1900.0F"
+			heading="130"
+			missedAltitude="3000.0F">
+
+			<ApproachLegs>
+				<!-- IAF: IF13, 10 NM final, at or above 2000 ft -->
+				<Leg
+					type="IF"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="IF13"
+					recommendedType="LOCALIZER"
+					recommendedRegion="EG"
+					recommendedIdent="RTO"
+					theta="310.0"
+					rho="10.0N"
+					altitudeDescriptor="+"
+					altitude1="2000.0F"
+					isIAF="TRUE"/>
+
+				<!-- CF to FAF FF13, 5 NM, 1900 ft (GS intercept) -->
+				<Leg
+					type="CF"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="FF13"
+					flyOver="FALSE"
+					recommendedType="LOCALIZER"
+					recommendedRegion="EG"
+					recommendedIdent="RTO"
+					theta="310.0"
+					rho="5.0N"
+					magneticCourse="130.0"
+					distance="5.0N"
+					altitudeDescriptor="A"
+					altitude1="1900.0F"
+					isFAF="TRUE"/>
+
+				<!-- CF to runway 13 -->
+				<Leg
+					type="CF"
+					fixType="RUNWAY"
+					fixRegion="EG"
+					fixIdent="RW13"
+					flyOver="TRUE"
+					recommendedType="LOCALIZER"
+					recommendedRegion="EG"
+					recommendedIdent="RTO"
+					theta="310.0"
+					rho="0.0N"
+					magneticCourse="130.0"
+					distance="5.0N"
+					altitudeDescriptor="A"
+					altitude1="272.0F"
+					isMAP="TRUE"/>
+			</ApproachLegs>
+
+			<MissedApproachLegs>
+				<!-- Climb runway heading to 1500 ft -->
+				<Leg
+					type="CA"
+					magneticCourse="130.0"
+					altitudeDescriptor="+"
+					altitude1="1500.0F"/>
+
+				<!-- Direct to missed-approach hold -->
+				<Leg
+					type="DF"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="MA13"
+					flyOver="TRUE"
+					turnDirection="R"
+					altitudeDescriptor="+"
+					altitude1="3000.0F"/>
+
+				<!-- Hold at MA13, right turns, 1 minute, inbound 130 -->
+				<Leg
+					type="HM"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="MA13"
+					turnDirection="R"
+					magneticCourse="130.0"
+					time="1.0"
+					altitudeDescriptor="A"
+					altitude1="3000.0F"/>
+			</MissedApproachLegs>
+
+			<!-- Straight-in from the IAF -->
+			<Transition
+				transitionType="FULL"
+				fixType="TERMINAL_WAYPOINT"
+				fixRegion="EG"
+				fixIdent="IF13"
+				altitude="2000.0F"
+				name="IF13">
+				<TransitionLegs>
+					<Leg
+						type="IF"
+						fixType="TERMINAL_WAYPOINT"
+						fixRegion="EG"
+						fixIdent="IF13"
+						altitudeDescriptor="+"
+						altitude1="2000.0F"/>
+					<Leg
+						type="CF"
+						fixType="TERMINAL_WAYPOINT"
+						fixRegion="EG"
+						fixIdent="FF13"
+						flyOver="FALSE"
+						magneticCourse="130.0"
+						distance="5.0N"
+						altitudeDescriptor="A"
+						altitude1="1900.0F"/>
+				</TransitionLegs>
+			</Transition>
+		</Approach>
+
+		<!-- ========== ILS RWY 31 (localizer OTR / 110.10) ========== -->
+		<Approach
+			type="ILS"
+			runway="31"
+			designator="NONE"
+			suffix="0"
+			gpsOverlay="FALSE"
+			fixType="TERMINAL_WAYPOINT"
+			fixRegion="EG"
+			fixIdent="FF31"
+			altitude="1900.0F"
+			heading="310"
+			missedAltitude="3000.0F">
+
+			<ApproachLegs>
+				<!-- IAF: IF31, 10 NM final, at or above 2000 ft -->
+				<Leg
+					type="IF"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="IF31"
+					recommendedType="LOCALIZER"
+					recommendedRegion="EG"
+					recommendedIdent="OTR"
+					theta="130.0"
+					rho="10.0N"
+					altitudeDescriptor="+"
+					altitude1="2000.0F"
+					isIAF="TRUE"/>
+
+				<!-- CF to FAF FF31, 5 NM, 1900 ft (GS intercept) -->
+				<Leg
+					type="CF"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="FF31"
+					flyOver="FALSE"
+					recommendedType="LOCALIZER"
+					recommendedRegion="EG"
+					recommendedIdent="OTR"
+					theta="130.0"
+					rho="5.0N"
+					magneticCourse="310.0"
+					distance="5.0N"
+					altitudeDescriptor="A"
+					altitude1="1900.0F"
+					isFAF="TRUE"/>
+
+				<!-- CF to runway 31 -->
+				<Leg
+					type="CF"
+					fixType="RUNWAY"
+					fixRegion="EG"
+					fixIdent="RW31"
+					flyOver="TRUE"
+					recommendedType="LOCALIZER"
+					recommendedRegion="EG"
+					recommendedIdent="OTR"
+					theta="130.0"
+					rho="0.0N"
+					magneticCourse="310.0"
+					distance="5.0N"
+					altitudeDescriptor="A"
+					altitude1="272.0F"
+					isMAP="TRUE"/>
+			</ApproachLegs>
+
+			<MissedApproachLegs>
+				<Leg
+					type="CA"
+					magneticCourse="310.0"
+					altitudeDescriptor="+"
+					altitude1="1500.0F"/>
+				<Leg
+					type="DF"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="MA31"
+					flyOver="TRUE"
+					turnDirection="R"
+					altitudeDescriptor="+"
+					altitude1="3000.0F"/>
+				<Leg
+					type="HM"
+					fixType="TERMINAL_WAYPOINT"
+					fixRegion="EG"
+					fixIdent="MA31"
+					turnDirection="R"
+					magneticCourse="310.0"
+					time="1.0"
+					altitudeDescriptor="A"
+					altitude1="3000.0F"/>
+			</MissedApproachLegs>
+
+			<Transition
+				transitionType="FULL"
+				fixType="TERMINAL_WAYPOINT"
+				fixRegion="EG"
+				fixIdent="IF31"
+				altitude="2000.0F"
+				name="IF31">
+				<TransitionLegs>
+					<Leg
+						type="IF"
+						fixType="TERMINAL_WAYPOINT"
+						fixRegion="EG"
+						fixIdent="IF31"
+						altitudeDescriptor="+"
+						altitude1="2000.0F"/>
+					<Leg
+						type="CF"
+						fixType="TERMINAL_WAYPOINT"
+						fixRegion="EG"
+						fixIdent="FF31"
+						flyOver="FALSE"
+						magneticCourse="310.0"
+						distance="5.0N"
+						altitudeDescriptor="A"
+						altitude1="1900.0F"/>
+				</TransitionLegs>
+			</Transition>
+		</Approach>
+
+<!-- ============================================================
+     PASTE END
+     ============================================================ -->
