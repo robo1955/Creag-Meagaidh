@@ -1,0 +1,10 @@
+{
+  "package-name": "robo-airport-eg56-saint-andrews",
+  "items": [
+    {
+      "type": "Airport",
+      "content": "EG56",
+      "revision": 1
+    }
+  ]
+}
