@@ -1,5 +1,3 @@
-Zip files can be unzipped into your community folder
-Save the directories and open the top level xml file as a project in the sdk to modify the airports to yur taste
 Unzip the files to your community folder to add the airports to your Microsoft Flight Simulator 2024 world.
 The folders contain the project files which can be opened in developer mode should you wish to modify them.
 Saint Andrews files updated 24/08/2026.
