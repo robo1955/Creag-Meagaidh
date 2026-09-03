@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Approach Brief — Landing Challenge Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E141B;
+    --panel:#161F29;
+    --panel-alt:#1C2734;
+    --line:#2B3948;
+    --line-soft:#212D3A;
+    --text:#E7EDF3;
+    --text-dim:#8FA2B3;
+    --text-faint:#5E7285;
+    --amber:#F2A93B;
+    --amber-dim:#8A6420;
+    --cyan:#4FD1C5;
+    --red:#E5646B;
+    --green:#6FCE8A;
+    --radius:3px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 700px at 15% -10%, #16202B 0%, transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Barlow', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  ::selection{background:var(--amber);color:#1a1200;}
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .cond{font-family:'Barlow Condensed', sans-serif;}
+
+  a{color:var(--cyan);}
+
+  /* ---------- Layout shell ---------- */
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:28px 20px 80px;
+  }
+
+  header.top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px;
+    margin-bottom:24px;
+    flex-wrap:wrap;
+  }
+  header.top .brand{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+  }
+  header.top h1{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    letter-spacing:0.5px;
+    margin:0;
+    line-height:1;
+  }
+  header.top h1 .accent{color:var(--amber);}
+  header.top .tag{
+    color:var(--text-dim);
+    font-size:14px;
+    max-width:420px;
+    line-height:1.4;
+  }
+  header.top .idbox{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    text-align:right;
+    line-height:1.6;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:22px;
+    align-items:start;
+  }
+  @media (max-width:860px){
+    .grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Panel base ---------- */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+  .panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--panel-alt);
+  }
+  .panel-head h2{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:15px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin:0;
+    color:var(--text-dim);
+  }
+  .panel-body{padding:16px;}
+
+  /* ---------- Controls (left column) ---------- */
+  .field{margin-bottom:16px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{
+    display:block;
+    font-size:12px;
+    color:var(--text-dim);
+    margin-bottom:7px;
+  }
+
+  .seg{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .seg button{
+    background:var(--panel-alt);
+    border:none;
+    border-right:1px solid var(--line);
+    color:var(--text-dim);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    padding:9px 2px;
+    cursor:pointer;
+  }
+  .seg button:last-child{border-right:none;}
+  .seg button.active{
+    background:var(--amber);
+    color:#241a04;
+    font-weight:700;
+  }
+  .seg button:not(.active):hover{background:#233042;color:var(--text);}
+
+  select{
+    width:100%;
+    background:var(--panel-alt);
+    color:var(--text);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:9px 10px;
+    font-family:'Barlow', sans-serif;
+    font-size:14px;
+  }
+  select:focus, button:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:1px;
+  }
+
+  .lockrow{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .lockrow label{margin-bottom:0;}
+  .lockbtn{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--text-faint);
+    border-radius:var(--radius);
+    width:30px;height:30px;
+    flex:0 0 auto;
+    cursor:pointer;
+    font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lockbtn.locked{border-color:var(--amber);color:var(--amber);background:rgba(242,169,59,0.08);}
+
+  .btn-primary{
+    width:100%;
+    background:var(--amber);
+    color:#241a04;
+    border:none;
+    border-radius:var(--radius);
+    padding:13px 14px;
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  .btn-primary:hover{background:#ffb84e;}
+  .btn-primary:active{transform:translateY(1px);}
+
+  .btn-ghost{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    border-radius:var(--radius);
+    padding:8px 12px;
+    font-family:'Barlow', sans-serif;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  .divider{
+    border:none;
+    border-top:1px solid var(--line-soft);
+    margin:18px 0;
+  }
+
+  details.customize summary{
+    cursor:pointer;
+    font-size:13px;
+    color:var(--text-dim);
+    margin-bottom:14px;
+    list-style:none;
+  }
+  details.customize summary::-webkit-details-marker{display:none;}
+  details.customize summary::before{content:"▸ ";color:var(--amber);}
+  details.customize[open] summary::before{content:"▾ ";}
+
+  /* ---------- Right column: brief card ---------- */
+  .cardhead{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:18px 20px;
+    border-bottom:1px solid var(--line);
+    background:var(--panel-alt);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .cardhead .field-name{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:26px;
+    font-weight:700;
+    line-height:1.1;
+  }
+  .cardhead .field-sub{
+    color:var(--text-dim);
+    font-size:13px;
+    margin-top:4px;
+  }
+  .diffbadge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:1px;
+    padding:5px 10px;
+    border-radius:2px;
+    border:1px solid currentColor;
+    height:fit-content;
+  }
+
+  .briefbody{padding:20px;}
+
+  .brief-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:640px){
+    .brief-grid{grid-template-columns:1fr;}
+  }
+
+  .section-label{
+    font-family:'Barlow Condensed', sans-serif;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin:0 0 10px 0;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--line-soft);
+  }
+
+  .kv{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:6px 10px;
+    font-size:14px;
+    margin-bottom:18px;
+  }
+  .kv .k{color:var(--text-dim);}
+  .kv .v{font-family:'JetBrains Mono', monospace;color:var(--text);text-align:right;}
+  .kv .v.hot{color:var(--amber);}
+  .kv .v.bad{color:var(--red);}
+
+  .constraint-box{
+    background:rgba(229,100,107,0.08);
+    border:1px solid rgba(229,100,107,0.35);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    font-size:14px;
+    color:#F3C4C7;
+    margin-bottom:18px;
+    line-height:1.45;
+  }
+  .constraint-box .cname{
+    color:var(--red);
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    display:block;
+    margin-bottom:4px;
+    font-size:13px;
+  }
+
+  table.rubric{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  table.rubric th{
+    text-align:left;
+    color:var(--text-faint);
+    font-weight:500;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    padding:6px 8px;
+    border-bottom:1px solid var(--line);
+  }
+  table.rubric td{
+    padding:7px 8px;
+    border-bottom:1px solid var(--line-soft);
+    color:var(--text);
+  }
+  table.rubric td.num{font-family:'JetBrains Mono', monospace;color:var(--cyan);}
+  table.rubric tr:last-child td{border-bottom:none;}
+
+  .grade-scale{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-top:6px;
+  }
+  .grade-pill{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:4px 8px;
+    color:var(--text-dim);
+  }
+  .grade-pill b{color:var(--text);}
+
+  /* wind/runway diagram */
+  .diagram-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:6px 0 4px;
+  }
+  .diagram-wrap svg{width:220px;height:220px;}
+  .diagram-readout{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    width:100%;
+    max-width:260px;
+    margin-top:10px;
+    text-align:center;
+  }
+  .diagram-readout div{
+    border-left:1px solid var(--line-soft);
+    padding:0 6px;
+  }
+  .diagram-readout div:first-child{border-left:none;}
+  .diagram-readout .lbl{font-size:10px;color:var(--text-faint);letter-spacing:0.5px;text-transform:uppercase;}
+  .diagram-readout .val{font-family:'JetBrains Mono', monospace;font-size:15px;color:var(--cyan);margin-top:2px;}
+
+  .actions-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:16px 20px 20px;
+    border-top:1px solid var(--line);
+  }
+
+  .footnote{
+    font-size:11px;
+    color:var(--text-faint);
+    padding:0 20px 18px;
+    line-height:1.5;
+  }
+
+  /* log */
+  .log-empty{
+    color:var(--text-faint);
+    font-size:13px;
+    padding:6px 0;
+  }
+  .log-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid var(--line-soft);
+    font-size:13px;
+  }
+  .log-item:last-child{border-bottom:none;}
+  .log-item .meta{color:var(--text-dim);font-size:11px;font-family:'JetBrains Mono', monospace;margin-top:2px;}
+  .log-item .btns{display:flex;gap:6px;flex:0 0 auto;}
+  .log-item button{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    border-radius:2px;
+    padding:5px 9px;
+    font-size:11px;
+    cursor:pointer;
+  }
+  .log-item button:hover{color:var(--cyan);border-color:var(--cyan);}
+  .log-item button.rm:hover{color:var(--red);border-color:var(--red);}
+
+  .toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%) translateY(10px);
+    background:var(--panel-alt);
+    border:1px solid var(--cyan);
+    color:var(--text);
+    padding:10px 18px;
+    border-radius:var(--radius);
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s ease, transform 0.25s ease;
+    z-index:50;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important; animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div>
+        <h1>APPROACH<span class="accent">BRIEF</span></h1>
+        <div class="tag">A landing-challenge generator for MSFS 2024 — roll a scenario, or hand-build one, then fly the numbers on your card.</div>
+      </div>
+    </div>
+    <div class="idbox">
+      SIM&nbsp;·&nbsp;MSFS 2024<br>
+      MODE&nbsp;·&nbsp;VISUAL LANDING TRAINER
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- LEFT: controls -->
+    <div class="panel">
+      <div class="panel-head"><h2>Mission Parameters</h2></div>
+      <div class="panel-body">
+
+        <div class="field">
+          <label>Difficulty</label>
+          <div class="seg" id="diffSeg">
+            <button data-val="cadet" class="active">CADET</button>
+            <button data-val="private">PVT</button>
+            <button data-val="commercial">COMM</button>
+            <button data-val="atp">ATP</button>
+            <button data-val="testpilot">TEST</button>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="field lockrow">
+          <label style="margin-bottom:0">Runway &amp; field</label>
+          <button class="lockbtn" id="lockRunway" title="Lock this section">🔒</button>
+        </div>
+        <div class="field lockrow">
+          <label style="margin-bottom:0">Weather &amp; wind</label>
+          <button class="lockbtn" id="lockWeather" title="Lock this section">🔒</button>
+        </div>
+        <div class="field lockrow">
+          <label style="margin-bottom:0">Aircraft</label>
+          <button class="lockbtn" id="lockAircraft" title="Lock this section">🔒</button>
+        </div>
+        <div class="field lockrow">
+          <label style="margin-bottom:0">Constraint</label>
+          <button class="lockbtn" id="lockConstraint" title="Lock this section">🔒</button>
+        </div>
+
+        <details class="customize">
+          <summary>Customize before rolling</summary>
+          <div class="field">
+            <label for="selCategory">Aircraft category</label>
+            <select id="selCategory">
+              <option value="">— any —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="selConstraint">Force constraint</label>
+            <select id="selConstraint">
+              <option value="">— any —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="selTime">Time of day</label>
+            <select id="selTime">
+              <option value="">— any —</option>
+              <option value="Day, clear light">Day, clear light</option>
+              <option value="Dusk, low sun glare">Dusk, low sun glare</option>
+              <option value="Night, lit runway">Night, lit runway</option>
+              <option value="Night, minimum lighting">Night, minimum lighting</option>
+            </select>
+          </div>
+        </details>
+
+        <hr class="divider">
+
+        <button class="btn-primary" id="btnGenerate">Generate Challenge</button>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: brief card -->
+    <div class="panel" id="briefCard">
+      <div class="cardhead">
+        <div>
+          <div class="field-name" id="outFieldName">—</div>
+          <div class="field-sub" id="outFieldSub">Press Generate to roll your first challenge.</div>
+        </div>
+        <div class="diffbadge" id="outDiffBadge" style="color:var(--text-faint);border-color:var(--line);">STANDBY</div>
+      </div>
+
+      <div class="briefbody">
+        <div class="brief-grid">
+
+          <!-- column A -->
+          <div>
+            <div class="section-label">Runway</div>
+            <div class="kv" id="kvRunway"></div>
+
+            <div class="section-label">Aircraft</div>
+            <div class="kv" id="kvAircraft"></div>
+
+            <div class="section-label">Constraint</div>
+            <div class="constraint-box" id="constraintBox">
+              <span class="cname">None rolled yet</span>
+              Generate a challenge to receive your special condition.
+            </div>
+          </div>
+
+          <!-- column B -->
+          <div>
+            <div class="section-label">Wind &amp; Conditions</div>
+            <div class="diagram-wrap">
+              <svg id="windSvg" viewBox="0 0 220 220"></svg>
+              <div class="diagram-readout">
+                <div><div class="lbl">Xwind</div><div class="val" id="rdXwind">–</div></div>
+                <div><div class="lbl">Head/Tail</div><div class="val" id="rdHwind">–</div></div>
+                <div><div class="lbl">Gust</div><div class="val" id="rdGust">–</div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-label">Landing Objective &amp; Scoring</div>
+        <table class="rubric" id="rubricTable">
+          <thead>
+            <tr><th>Metric</th><th>Target for full marks</th></tr>
+          </thead>
+          <tbody id="rubricBody"></tbody>
+        </table>
+
+        <div style="margin-top:14px;">
+          <div class="section-label" style="border:none;padding-bottom:0;">Grade scale</div>
+          <div class="grade-scale" id="gradeScale"></div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button class="btn-ghost" id="btnCopy">Copy briefing text</button>
+        <button class="btn-ghost" id="btnDownload">Download .txt</button>
+        <button class="btn-ghost" id="btnSave">Add to flight log</button>
+      </div>
+      <div class="footnote">Fictional field &amp; scoring data generated for training purposes — not real-world navigation data. Set matching conditions in the MSFS 2024 weather &amp; time menus before you fly.</div>
+    </div>
+
+  </div>
+
+  <!-- FLIGHT LOG -->
+  <div class="panel" style="margin-top:22px;">
+    <div class="panel-head">
+      <h2>Flight Log — this session</h2>
+      <span style="font-size:11px;color:var(--text-faint);font-family:'JetBrains Mono',monospace;" id="logCount">0 saved</span>
+    </div>
+    <div class="panel-body" id="logList">
+      <div class="log-empty">No challenges saved yet. Generate one and click "Add to flight log."</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+
+  /* ---------------- Data pools ---------------- */
+
+  const DIFFICULTY = {
+    cadet:     { label:'Cadet',      runwayFt:[6500,9000], windSpeed:[2,10],  gustChance:0.1, gustAdd:[3,6],  vis:['CAVOK','10 SM'], ceiling:['Clear','Few, 3500 ft'], touchdownZone:800, vsFull:200, vsOk:400, speedTol:12, centerline:45, constraintPool:['none','none','none','light-x'] },
+    private:   { label:'Private',    runwayFt:[4500,7000], windSpeed:[5,14],  gustChance:0.2, gustAdd:[4,8],  vis:['10 SM','7 SM'],  ceiling:['Few, 3000 ft','Scattered, 2500 ft'], touchdownZone:600, vsFull:150, vsOk:350, speedTol:10, centerline:35, constraintPool:['none','light-x','short','offset'] },
+    commercial:{ label:'Commercial', runwayFt:[3200,5500], windSpeed:[8,18],  gustChance:0.35,gustAdd:[5,10], vis:['6 SM','5 SM','3 SM haze'], ceiling:['Scattered, 2000 ft','Broken, 1800 ft'], touchdownZone:450, vsFull:120, vsOk:300, speedTol:8, centerline:25, constraintPool:['short','x-gust','engine-out','circling','offset','night'] },
+    atp:       { label:'ATP',        runwayFt:[2200,4000], windSpeed:[12,24], gustChance:0.5, gustAdd:[6,12], vis:['4 SM','3 SM','2 SM rain'], ceiling:['Broken, 1200 ft','Broken, 900 ft'], touchdownZone:300, vsFull:100, vsOk:250, speedTol:6, centerline:18, constraintPool:['x-gust','engine-out','circling','sidestep','no-flap','night-min','wet'] },
+    testpilot: { label:'Test Pilot', runwayFt:[1500,2800], windSpeed:[18,32], gustChance:0.7, gustAdd:[8,15], vis:['2 SM fog','1 SM rain','1.5 SM snow'], ceiling:['Overcast, 600 ft','Overcast, 400 ft'], touchdownZone:200, vsFull:80,  vsOk:180, speedTol:4, centerline:12, constraintPool:['x-gust','engine-out','no-flap','sidestep','night-min','icy','high-da','go-around'] },
+  };
+
+  const CATEGORIES = [
+    { key:'lightGA',  label:'Light GA', craft:['C152','C172','PA-28 Cherokee'] },
+    { key:'complexGA',label:'Complex GA / Piston Twin', craft:['SR22','Bonanza A36','Baron 58'] },
+    { key:'turboprop',label:'Turboprop', craft:['TBM 930','King Air 350','Caravan 208'] },
+    { key:'bizjet',   label:'Business Jet', craft:['Citation CJ4','Longitude'] },
+    { key:'regional', label:'Regional Jet', craft:['CRJ-700','E175'] },
+    { key:'airliner', label:'Airliner', craft:['A320neo','737-800','787-10'] },
+    { key:'bush',     label:'Bush / Backcountry', craft:['Kodiak 100','DHC-2 Beaver','XCub'] },
+    { key:'heli',     label:'Helicopter', craft:['R66','H145'] },
+  ];
+
+  const CONSTRAINTS = {
+    'none':      { name:'Standard visual approach', text:'No special handicap — fly a stable, by-the-book visual approach to the numbers.' },
+    'light-x':   { name:'Light crosswind awareness', text:'A gentle crosswind is present. Practice a wing-low or crab-and-kick technique through the flare.' },
+    'short':     { name:'Short-field landing', text:'Treat the far end of the runway as an obstacle. Touch down at minimum safe speed and stop within the touchdown zone.' },
+    'offset':    { name:'Offset / non-precision approach', text:'No glidepath guidance. Fly the approach visually from an offset entry and correct back to the extended centerline.' },
+    'x-gust':    { name:'Gusting crosswind', text:'Wind is gusting above the steady value shown. Carry an appropriate gust factor on final and expect a firm correction near the flare.' },
+    'engine-out':{ name:'Engine failure on final', text:'Simulate a power loss abeam the field or on final. Fly the approach to touchdown without adding thrust.' },
+    'circling':  { name:'Circling approach', text:'Break off a straight-in approach and circle to land on the assigned runway, remaining within the circling area.' },
+    'sidestep':  { name:'Sidestep to parallel runway', text:'Fly the approach to the primary runway, then sidestep visually to land on the parallel strip inside 500 ft AGL.' },
+    'no-flap':   { name:'No-flap landing', text:'Flaps are unavailable. Plan for a flatter approach, higher approach speed, and longer landing roll.' },
+    'night':     { name:'Night approach', text:'Conditions are after dark. Runway and approach lighting are your primary visual references.' },
+    'night-min': { name:'Night, minimum lighting', text:'Night conditions with reduced or partial runway lighting. Expect a shallower visual picture on short final.' },
+    'wet':       { name:'Wet runway', text:'The surface is wet. Add stopping-distance margin and anticipate reduced braking and directional control after touchdown.' },
+    'icy':       { name:'Contaminated / icy runway', text:'The surface is icy. Braking action is poor — plan the approach for a soft, minimum-sink touchdown and gentle rollout.' },
+    'high-da':   { name:'High density altitude', text:'Field elevation and temperature combine for reduced performance. Expect a higher true airspeed and longer roll for the same indicated numbers.' },
+    'go-around': { name:'Mandatory go-around', text:'Fly a full approach to a go-around at your discretion, then reconfigure and land on the second attempt only.' },
+  };
+
+  const TERRAIN = ['coastal plateau','river delta lowland','high desert mesa','mountain valley','farmland plain','island strip','arctic tundra edge','forest clearing','canyon approach corridor','urban infill site','lakeside shelf','volcanic highland'];
+  const FIELD_PREFIX = ['Blackrock','Cinder Bay','Whitestone','Amber Ridge','Dry Creek','Norther','Saltmarsh','Fallow','Ironwood','Crescent','Thistledown','Harrow','Kestrel','Longshadow','Millbrook'];
+  const FIELD_SUFFIX = ['Municipal','Regional','County','Airpark','Field','Strip','Aerodrome'];
+
+  /* ---------------- State ---------------- */
+
+  let current = null;
+  const locks = { runway:false, weather:false, aircraft:false, constraint:false };
+  const savedLog = [];
+  let selectedDifficulty = 'cadet';
+
+  /* ---------------- Populate customize selects ---------------- */
+
+  const selCategory = document.getElementById('selCategory');
+  CATEGORIES.forEach(c=>{
+    const o = document.createElement('option');
+    o.value = c.key; o.textContent = c.label;
+    selCategory.appendChild(o);
+  });
+
+  const selConstraint = document.getElementById('selConstraint');
+  Object.keys(CONSTRAINTS).forEach(k=>{
+    if(k==='none') return;
+    const o = document.createElement('option');
+    o.value = k; o.textContent = CONSTRAINTS[k].name;
+    selConstraint.appendChild(o);
+  });
+
+  /* ---------------- Helpers ---------------- */
+
+  function rand(min,max){ return Math.random()*(max-min)+min; }
+  function randInt(min,max){ return Math.round(rand(min,max)); }
+  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+  function round5(n){ return Math.round(n/5)*5; }
+
+  function genRunwayHeading(){
+    const h = randInt(1,36);
+    return h===0?36:h;
+  }
+
+  /* ---------------- Core generation ---------------- */
+
+  function generateChallenge(){
+    const diff = DIFFICULTY[selectedDifficulty];
+
+    // RUNWAY / FIELD
+    let runway = current && locks.runway ? current.runway : {
+      heading: genRunwayHeading(),
+      lengthFt: round5(randInt(diff.runwayFt[0], diff.runwayFt[1])),
+      elevFt: randInt(10, 6200),
+      terrain: pick(TERRAIN),
+      name: pick(FIELD_PREFIX) + ' ' + pick(FIELD_SUFFIX),
+    };
+
+    // WEATHER / WIND
+    let weather = current && locks.weather ? current.weather : (function(){
+      const speed = randInt(diff.windSpeed[0], diff.windSpeed[1]);
+      const gusting = Math.random() < diff.gustChance;
+      const gust = gusting ? speed + randInt(diff.gustAdd[0], diff.gustAdd[1]) : null;
+      const windDir = randInt(0,359);
+      return {
+        speed, gust, windDir,
+        vis: pick(diff.vis),
+        ceiling: pick(diff.ceiling),
+        time: document.getElementById('selTime').value || pick(['Day, clear light','Dusk, low sun glare','Night, lit runway']),
+      };
+    })();
+
+    // AIRCRAFT
+    let aircraft = current && locks.aircraft ? current.aircraft : (function(){
+      const forced = selCategory.value;
+      const cat = forced ? CATEGORIES.find(c=>c.key===forced) : pick(CATEGORIES);
+      return { category: cat.label, type: pick(cat.craft) };
+    })();
+
+    // CONSTRAINT
+    let constraintKey = current && locks.constraint ? current.constraintKey : (function(){
+      const forced = selConstraint.value;
+      if(forced) return forced;
+      return pick(diff.constraintPool);
+    })();
+
+    current = { difficulty: selectedDifficulty, runway, weather, aircraft, constraintKey };
+    render(diff);
+  }
+
+  /* ---------------- Rendering ---------------- */
+
+  function windComponents(runwayHeadingDeg, windDirDeg, speedKt){
+    const rwyDeg = runwayHeadingDeg*10;
+    const rel = ((windDirDeg - rwyDeg + 540) % 360) - 180; // -180..180
+    const rad = rel*Math.PI/180;
+    const crosswind = Math.abs(Math.round(speedKt*Math.sin(rad)));
+    const headwind = Math.round(speedKt*Math.cos(rad));
+    return { crosswind, headwind, relDeg: rel };
+  }
+
+  function renderWindSvg(runwayHeadingDeg, windDirDeg){
+    const rwyDeg = runwayHeadingDeg*10;
+    const cx=110, cy=110, r=92;
+    let ticks = '';
+    for(let d=0; d<360; d+=30){
+      const rad = d*Math.PI/180;
+      const x1 = cx + Math.sin(rad)*(r-6), y1 = cy - Math.cos(rad)*(r-6);
+      const x2 = cx + Math.sin(rad)*r, y2 = cy - Math.cos(rad)*r;
+      ticks += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#2B3948" stroke-width="2"/>`;
+    }
+    // runway rectangle, rotated to heading
+    const rwLen = 120, rwWid = 20;
+    const runwayRect = `
+      <g transform="rotate(${rwyDeg} ${cx} ${cy})">
+        <rect x="${cx-rwWid/2}" y="${cy-rwLen/2}" width="${rwWid}" height="${rwLen}" fill="#233042" stroke="#4FD1C5" stroke-width="1.5"/>
+        <line x1="${cx}" y1="${cy-rwLen/2+8}" x2="${cx}" y2="${cy+rwLen/2-8}" stroke="#4FD1C5" stroke-width="1" stroke-dasharray="5,4" opacity="0.6"/>
+      </g>
+      <text x="${cx}" y="${cy - rwLen/2 - 4}" fill="#4FD1C5" font-family="JetBrains Mono" font-size="11" text-anchor="middle" transform="rotate(${rwyDeg} ${cx} ${cy}) translate(0,0)"></text>
+    `;
+    // wind arrow rotated to wind direction (points FROM direction, i.e. arrow shows where wind comes from, pointing inward)
+    const windArrow = `
+      <g transform="rotate(${windDirDeg} ${cx} ${cy})">
+        <line x1="${cx}" y1="${cy-r+10}" x2="${cx}" y2="${cy-14}" stroke="#F2A93B" stroke-width="3" stroke-linecap="round"/>
+        <polygon points="${cx-7},${cy-14} ${cx+7},${cy-14} ${cx},${cy-2}" fill="#F2A93B"/>
+      </g>
+    `;
+    const rwyLabel = `<text x="${cx}" y="${cy+5}" fill="#8FA2B3" font-family="JetBrains Mono" font-size="10" text-anchor="middle" opacity="0.001">.</text>`;
+
+    const headingLabelPos = (()=>{
+      const rad = rwyDeg*Math.PI/180;
+      const lx = cx + Math.sin(rad)*(r+16);
+      const ly = cy - Math.cos(rad)*(r+16);
+      return {lx,ly};
+    })();
+
+    const svg = `
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="#141C25" stroke="#2B3948" stroke-width="1.5"/>
+      ${ticks}
+      <text x="${cx}" y="24" fill="#5E7285" font-family="Barlow Condensed" font-size="12" text-anchor="middle" letter-spacing="1">N</text>
+      <text x="196" y="114" fill="#5E7285" font-family="Barlow Condensed" font-size="12" text-anchor="middle" letter-spacing="1">E</text>
+      <text x="${cx}" y="200" fill="#5E7285" font-family="Barlow Condensed" font-size="12" text-anchor="middle" letter-spacing="1">S</text>
+      <text x="24" y="114" fill="#5E7285" font-family="Barlow Condensed" font-size="12" text-anchor="middle" letter-spacing="1">W</text>
+      ${runwayRect}
+      ${windArrow}
+      <text x="${headingLabelPos.lx}" y="${headingLabelPos.ly}" fill="#4FD1C5" font-family="JetBrains Mono" font-size="12" text-anchor="middle" font-weight="700">RWY ${String(runwayHeadingDeg).padStart(2,'0')}</text>
+      <circle cx="${cx}" cy="${cy}" r="3" fill="#8FA2B3"/>
+    `;
+
+    const svgEl = document.getElementById('windSvg');
+    svgEl.setAttribute('viewBox','0 0 220 220');
+    svgEl.innerHTML = svg;
+    svgEl.style.transition = 'transform 0.5s cubic-bezier(.2,.9,.25,1)';
+    svgEl.style.transform = 'rotate(-8deg) scale(0.96)';
+    requestAnimationFrame(()=>{ svgEl.style.transform = 'rotate(0deg) scale(1)'; });
+  }
+
+  function rubricRows(diff){
+    return [
+      ['Touchdown point', `Within ${diff.touchdownZone} ft of the aim markers`],
+      ['Vertical speed at touchdown', `Under ${diff.vsFull} fpm for full marks, under ${diff.vsOk} fpm to pass`],
+      ['Touchdown airspeed', `Within ${diff.speedTol} kt of your aircraft's reference speed`],
+      ['Centerline deviation', `Within ${diff.centerline} ft of the runway centerline at touchdown`],
+      ['Directional control', 'No runway excursion during rollout'],
+    ];
+  }
+
+  function gradeScaleHtml(diff){
+    return `
+      <span class="grade-pill"><b>S</b> — all targets met, VS under ${Math.round(diff.vsFull*0.6)} fpm</span>
+      <span class="grade-pill"><b>A</b> — all targets met</span>
+      <span class="grade-pill"><b>B</b> — one target missed narrowly</span>
+      <span class="grade-pill"><b>C</b> — firm or off-center, no excursion</span>
+      <span class="grade-pill"><b>F</b> — runway excursion or go-around not flown as briefed</span>
+    `;
+  }
+
+  function fmtTime(){
+    const d = new Date();
+    return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  }
+
+  function render(diff){
+    const c = current;
+    const cst = CONSTRAINTS[c.constraintKey];
+
+    document.getElementById('outFieldName').textContent = c.runway.name.toUpperCase();
+    document.getElementById('outFieldSub').textContent = `${c.runway.terrain}, elevation ${c.runway.elevFt.toLocaleString()} ft · rolled ${fmtTime()}`;
+
+    const badge = document.getElementById('outDiffBadge');
+    badge.textContent = diff.label.toUpperCase();
+    const diffColor = {cadet:'#6FCE8A', private:'#4FD1C5', commercial:'#F2A93B', atp:'#E5A93B', testpilot:'#E5646B'}[c.difficulty];
+    badge.style.color = diffColor;
+    badge.style.borderColor = diffColor;
+
+    // runway kv
+    document.getElementById('kvRunway').innerHTML = `
+      <div class="k">Runway heading</div><div class="v">${String(c.runway.heading).padStart(2,'0')}</div>
+      <div class="k">Length</div><div class="v">${c.runway.lengthFt.toLocaleString()} ft</div>
+      <div class="k">Field elevation</div><div class="v">${c.runway.elevFt.toLocaleString()} ft</div>
+      <div class="k">Terrain</div><div class="v" style="text-transform:capitalize;">${c.runway.terrain}</div>
+      <div class="k">Visibility</div><div class="v">${c.weather.vis}</div>
+      <div class="k">Ceiling</div><div class="v">${c.weather.ceiling}</div>
+      <div class="k">Time of day</div><div class="v" style="text-align:right;">${c.weather.time}</div>
+    `;
+
+    // aircraft kv
+    document.getElementById('kvAircraft').innerHTML = `
+      <div class="k">Category</div><div class="v">${c.aircraft.category}</div>
+      <div class="k">Suggested type</div><div class="v">${c.aircraft.type}</div>
+      <div class="k">Config</div><div class="v">Pilot's choice, per checklist</div>
+    `;
+
+    // constraint
+    document.getElementById('constraintBox').innerHTML = `<span class="cname">${cst.name}</span>${cst.text}`;
+
+    // wind diagram + readouts
+    renderWindSvg(c.runway.heading, c.weather.windDir);
+    const wc = windComponents(c.runway.heading, c.weather.windDir, c.weather.speed);
+    document.getElementById('rdXwind').textContent = wc.crosswind + ' kt';
+    document.getElementById('rdHwind').textContent = (wc.headwind>=0? '+':'') + wc.headwind + ' kt';
+    document.getElementById('rdGust').textContent = c.weather.gust ? ('G' + c.weather.gust) : '—';
+
+    // rubric
+    document.getElementById('rubricBody').innerHTML = rubricRows(diff).map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td></tr>`).join('');
+    document.getElementById('gradeScale').innerHTML = gradeScaleHtml(diff);
+  }
+
+  /* ---------------- Briefing text export ---------------- */
+
+  function briefingText(){
+    if(!current) return '';
+    const diff = DIFFICULTY[current.difficulty];
+    const c = current;
+    const cst = CONSTRAINTS[c.constraintKey];
+    const wc = windComponents(c.runway.heading, c.weather.windDir, c.weather.speed);
+    return [
+      `APPROACH BRIEF — ${c.runway.name.toUpperCase()}`,
+      `Difficulty: ${diff.label}`,
+      `Terrain: ${c.runway.terrain} · Field elevation: ${c.runway.elevFt} ft`,
+      ``,
+      `RUNWAY`,
+      `  Heading: ${String(c.runway.heading).padStart(2,'0')}   Length: ${c.runway.lengthFt} ft`,
+      ``,
+      `CONDITIONS`,
+      `  Wind: ${c.weather.windDir}° at ${c.weather.speed} kt${c.weather.gust? ' gusting '+c.weather.gust+' kt':''}`,
+      `  Crosswind component: ${wc.crosswind} kt   Head/Tail: ${wc.headwind>=0?'+':''}${wc.headwind} kt`,
+      `  Visibility: ${c.weather.vis}   Ceiling: ${c.weather.ceiling}`,
+      `  Time of day: ${c.weather.time}`,
+      ``,
+      `AIRCRAFT`,
+      `  Category: ${c.aircraft.category}   Suggested type: ${c.aircraft.type}`,
+      ``,
+      `CONSTRAINT — ${cst.name}`,
+      `  ${cst.text}`,
+      ``,
+      `SCORING`,
+      ...rubricRows(diff).map(r=>`  ${r[0]}: ${r[1]}`),
+      ``,
+      `GRADE SCALE`,
+      `  S: all targets, VS < ${Math.round(diff.vsFull*0.6)} fpm   A: all targets   B: one narrow miss`,
+      `  C: firm/off-center, no excursion   F: excursion or go-around not flown as briefed`,
+    ].join('\n');
+  }
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(()=>t.classList.remove('show'), 2200);
+  }
+
+  /* ---------------- Flight log ---------------- */
+
+  function renderLog(){
+    const list = document.getElementById('logList');
+    document.getElementById('logCount').textContent = savedLog.length + ' saved';
+    if(savedLog.length===0){
+      list.innerHTML = '<div class="log-empty">No challenges saved yet. Generate one and click "Add to flight log."</div>';
+      return;
+    }
+    list.innerHTML = savedLog.map((entry, i)=>`
+      <div class="log-item">
+        <div>
+          <div>${entry.runway.name} — RWY ${String(entry.runway.heading).padStart(2,'0')}</div>
+          <div class="meta">${DIFFICULTY[entry.difficulty].label.toUpperCase()} · ${entry.aircraft.type} · WIND ${entry.weather.windDir}°/${entry.weather.speed}KT · ${entry.savedAt}</div>
+        </div>
+        <div class="btns">
+          <button data-i="${i}" class="reload">Reload</button>
+          <button data-i="${i}" class="rm">Remove</button>
+        </div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.reload').forEach(b=>b.addEventListener('click', e=>{
+      const i = +e.target.dataset.i;
+      current = JSON.parse(JSON.stringify(savedLog[i]));
+      selectedDifficulty = current.difficulty;
+      updateDiffButtons();
+      render(DIFFICULTY[current.difficulty]);
+      showToast('Reloaded from flight log');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }));
+    list.querySelectorAll('.rm').forEach(b=>b.addEventListener('click', e=>{
+      const i = +e.target.dataset.i;
+      savedLog.splice(i,1);
+      renderLog();
+    }));
+  }
+
+  /* ---------------- Wire up controls ---------------- */
+
+  function updateDiffButtons(){
+    document.querySelectorAll('#diffSeg button').forEach(b=>{
+      b.classList.toggle('active', b.dataset.val===selectedDifficulty);
+    });
+  }
+
+  document.getElementById('diffSeg').addEventListener('click', e=>{
+    const b = e.target.closest('button');
+    if(!b) return;
+    selectedDifficulty = b.dataset.val;
+    updateDiffButtons();
+  });
+
+  function wireLock(btnId, key){
+    const btn = document.getElementById(btnId);
+    btn.addEventListener('click', ()=>{
+      locks[key] = !locks[key];
+      btn.classList.toggle('locked', locks[key]);
+    });
+  }
+  wireLock('lockRunway','runway');
+  wireLock('lockWeather','weather');
+  wireLock('lockAircraft','aircraft');
+  wireLock('lockConstraint','constraint');
+
+  document.getElementById('btnGenerate').addEventListener('click', ()=>{
+    generateChallenge();
+  });
+
+  document.getElementById('btnCopy').addEventListener('click', async ()=>{
+    if(!current){ showToast('Generate a challenge first'); return; }
+    try{
+      await navigator.clipboard.writeText(briefingText());
+      showToast('Briefing copied to clipboard');
+    }catch(e){
+      showToast('Copy failed — select and copy manually');
+    }
+  });
+
+  document.getElementById('btnDownload').addEventListener('click', ()=>{
+    if(!current){ showToast('Generate a challenge first'); return; }
+    const blob = new Blob([briefingText()], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = current.runway.name.replace(/\s+/g,'_') + '_brief.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Briefing downloaded');
+  });
+
+  document.getElementById('btnSave').addEventListener('click', ()=>{
+    if(!current){ showToast('Generate a challenge first'); return; }
+    const entry = JSON.parse(JSON.stringify(current));
+    entry.savedAt = fmtTime();
+    savedLog.unshift(entry);
+    renderLog();
+    showToast('Added to flight log');
+  });
+
+  /* ---------------- Init ---------------- */
+
+  generateChallenge();
+
+})();
+</script>
+
+</body>
+</html>
