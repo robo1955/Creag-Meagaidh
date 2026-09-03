@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SAMPLE MSFS 2024 MISSION XML
+  Light cargo: Edinburgh (EGPH) -> Saint Andrews (EGSAN / EG56)
+
+  HONEST LIMITS
+  -------------
+  Asobo career cargo (CAR-PSO) missions cannot be created or edited.
+  The SDK only lets you make aircraft *compatible* with career cargo.
+  This file is the Activity / Bush Trip mission format, which *is*
+  authorable. In SU6 it shows under Activities if packed as a Mission
+  package. You can also just load the companion .pln in Free Flight.
+
+  EGPH is Edinburgh. Glasgow is EGPF. This sample uses EGPH as written.
+  Destination ident is EG56 (your Saint Andrews airport), not EG56
+  (that is only the scenery folder name).
+
+  FILES THAT MUST AGREE
+  ---------------------
+  Waypoint names and coordinates in this XML must match
+  LightCargo_EGPH_EGSAN.pln exactly, or the sim fails silently.
+
+  TO PACK IT
+  ----------
+  Mission package type, asset group Mission, sources in:
+    PackageSources\Missions\<company>\<mission>\
+  plus a matching .pln (and usually a .flt + briefing image).
+-->
+<SimBase.Document Type="MissionFile" version="1,0" id="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B200}">
+	<Title>Light Cargo - Edinburgh to Saint Andrews</Title>
+	<Filename>LightCargo_EGPH_EGSAN.xml</Filename>
+
+	<WorldBase.Flight InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B201}">
+
+		<!-- ============================================================
+		     Mission type. Other types: SimMission.Tutorial,
+		     SimMission.LandingChallenge, etc.
+		     ============================================================ -->
+		<SimMission.MissionBushTrip InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B202}" id="LightCargo_EGPH_EGSAN">
+			<Descr>Fly a light cargo shipment of golf-club parts from Edinburgh to Saint Andrews.</Descr>
+			<IsOnGround>True</IsOnGround>
+
+			<Legs>
+				<!-- One airport-to-airport leg. Add more <Leg> blocks for multi-hop. -->
+				<Leg>
+					<Descr>EGPH to EG56 - light cargo</Descr>
+					<AirportLandingTriggerEnd UniqueRefId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B210}"/>
+					<SubLegs>
+						<SubLeg>
+							<Descr>Depart Edinburgh RWY 06/24. Climb on track 050, remain clear of the Forth bridges until 2500 ft, then continue northeast over Fife.</Descr>
+							<ImagePath></ImagePath>
+							<ATCWaypointStart id="EGPH"/>
+							<ATCWaypointEnd id="FIFE1"/>
+						</SubLeg>
+						<SubLeg>
+							<Descr>From the Fife coast waypoint, track 055 toward Saint Andrews. Expect ILS 13 (RTO / 111.10) or visual for 13/31. Land, taxi to parking, shut down.</Descr>
+							<ImagePath></ImagePath>
+							<ATCWaypointStart id="FIFE1"/>
+							<ATCWaypointEnd id="EG56"/>
+						</SubLeg>
+					</SubLegs>
+				</Leg>
+			</Legs>
+
+			<Objectives>
+				<Objective UniqueRefId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B220}"/>
+			</Objectives>
+
+			<OnFinishedActions>
+				<SimMission.ObjectReference id="ResolveSuccess" InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B221}"/>
+			</OnFinishedActions>
+		</SimMission.MissionBushTrip>
+
+		<!-- ============================================================
+		     One AirportCalculator per airport in the trip.
+		     UniqueRefId on the landing trigger must match the destination
+		     calculator InstanceId.
+		     ============================================================ -->
+		<SimMission.AirportCalculator InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B208}">
+			<Descr>Departure airport - Edinburgh</Descr>
+			<ICAO>EGPH</ICAO>
+		</SimMission.AirportCalculator>
+
+		<SimMission.AirportCalculator InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B210}">
+			<Descr>Destination airport - Saint Andrews</Descr>
+			<ICAO>EG56</ICAO>
+		</SimMission.AirportCalculator>
+
+		<!-- ============================================================
+		     Goals. Success fires when the last leg landing trigger fires.
+		     ============================================================ -->
+		<SimMission.Goal InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B220}">
+			<Descr>Deliver cargo to Saint Andrews</Descr>
+			<Text>Land at Saint Andrews (EGS56) and shut down with the cargo intact.</Text>
+			<Activated>True</Activated>
+		</SimMission.Goal>
+
+		<SimMission.GoalResolutionAction InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B221}">
+			<Descr>ResolveSuccess</Descr>
+			<GoalReference id="Deliver cargo to Saint Andrews" InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B220}"/>
+			<GoalState>Success</GoalState>
+		</SimMission.GoalResolutionAction>
+
+		<!-- Optional: popup when the player is near Saint Andrews -->
+		<SimMission.ProximityTrigger InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B230}">
+			<Descr>Approaching Saint Andrews</Descr>
+			<DefaultActivated>True</DefaultActivated>
+			<OneShot>True</OneShot>
+			<OnEnterActions>
+				<SimMission.ObjectReference id="ArrivalDialog" InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B231}"/>
+			</OnEnterActions>
+		</SimMission.ProximityTrigger>
+
+		<SimMission.DialogAction InstanceId="{7E4C1A90-2B3F-4D81-9C6A-11F0E8A4B231}">
+			<Descr>ArrivalDialog</Descr>
+			<Text>Saint Andrews in sight. Expect runway 13, ILS 111.10. Deliver the cargo to parking after landing.</Text>
+			<Skippable>True</Skippable>
+			<Immediate>True</Immediate>
+		</SimMission.DialogAction>
+
+	</WorldBase.Flight>
+</SimBase.Document>

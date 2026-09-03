@@ -2,13 +2,13 @@
   "content": [
     {
       "path": "bglindex.bout",
-      "size": 1093,
-      "date": 134320400190017058
+      "size": 1389,
+      "date": 134329316150017058
     },
     {
       "path": "contentinfo/robo-airport-eg56-saint-andrews/contenthistory.json",
       "size": 155,
-      "date": 134320400190000000
+      "date": 134329316150000000
     },
     {
       "path": "contentinfo/robo-airport-eg56-saint-andrews/thumbnail.jpg",
@@ -17,8 +17,8 @@
     },
     {
       "path": "scenery/airport-eg56-saint-andrews/scenery/eg56.bgl",
-      "size": 7418,
-      "date": 134320400190000006
+      "size": 13246,
+      "date": 134329316150000006
     }
   ]
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Companion flight plan for LightCargo_EGPH_EGSAN.xml
+  Waypoint ids MUST match the mission XML: EGPH, FIFE1, EGSAN
+
+  Load this in Free Flight via the EFB / world map if you just want
+  the route without packing a Mission package.
+
+  Route: Edinburgh EGPH -> Fife coast VFR waypoint -> Saint Andrews EGSAN
+  Distance: about 45 NM. Light cargo in a C172 / Caravan / similar.
+  Cruise 3500 ft VFR.
+-->
+<SimBase.Document>
+	<Descr>AceXML Document</Descr>
+	<FlightPlan.FlightPlan>
+		<Title>EGPH to EG56</Title>
+		<FPType>VFR</FPType>
+		<CruisingAlt>3500.000</CruisingAlt>
+		<DepartureID>EGPH</DepartureID>
+		<DestinationID>EG56</DestinationID>
+		<DepartureLLA>N55° 57' 00.00",W003° 22' 21.00",+000136.00</DepartureLLA>
+		<DestinationLLA>N56° 18' 14.73",W002° 44' 36.28",+000279.47</DestinationLLA>
+		<Descr>Edinburgh to Saint Andrews - light cargo</Descr>
+		<DepartureName>Edinburgh</DepartureName>
+		<DestinationName>Saint Andrews</DestinationName>
+		<AppVersion>
+			<AppVersionMajor>12</AppVersionMajor>
+			<AppVersionBuild>0</AppVersionBuild>
+		</AppVersion>
+		<ATCWaypoint>
+			<ATCWaypointType>Airport</ATCWaypointType>
+			<WorldPosition>N55° 57' 00.00",W003° 22' 21.00",+000136.00</WorldPosition>
+			<ICAO>
+				<ICAOIdent>EGPH</ICAOIdent>
+			</ICAO>
+		</ATCWaypoint>
+		<ATCWaypoint>
+			<ATCWaypointType>User</ATCWaypointType>
+			<WorldPosition>N56° 07' 37.37",W003° 03' 28.64",+003500.00</WorldPosition>
+			<ICAO>
+				<ICAOIdent>FIFE1</ICAOIdent>
+			</ICAO>
+		</ATCWaypoint>
+		<ATCWaypoint>
+			<ATCWaypointType>Airport</ATCWaypointType>
+			<WorldPosition>N56° 18' 14.73",W002° 44' 36.28",+000279.47</WorldPosition>
+			<ICAO>
+				<ICAOIdent>EG56</ICAOIdent>
+			</ICAO>
+		</ATCWaypoint>
+	</FlightPlan.FlightPlan>
+</SimBase.Document>

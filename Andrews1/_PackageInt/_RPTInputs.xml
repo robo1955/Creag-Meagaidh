@@ -1,10 +1,10 @@
 <RPTInputs>
-	<RPTInput Path="D:\MSFSsdkprojects\Andrews1\PackageDefinitions\robo-airport-eg56-saint-andrews\ContentInfo\Thumbnail.jpg">
+	<RPTInput Path="d:\msfssdkprojects\andrews1\PackageDefinitions\robo-airport-eg56-saint-andrews\ContentInfo\Thumbnail.jpg">
 		<Package Name="robo-airport-eg56-saint-andrews">
 			<AssetGroup Name="ContentInfo"/>
 		</Package>
 	</RPTInput>
-	<RPTInput Path="D:\MSFSsdkprojects\Andrews1\PackageSources\Scenery\airport-eg56-saint-andrews\scenery\EG56.xml">
+	<RPTInput Path="d:\msfssdkprojects\andrews1\PackageSources\Scenery\airport-eg56-saint-andrews\scenery\EG56.xml">
 		<Package Name="robo-airport-eg56-saint-andrews">
 			<AssetGroup Name="scenery"/>
 		</Package>
